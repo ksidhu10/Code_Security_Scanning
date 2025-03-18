@@ -1,8 +1,9 @@
 import os
 import pymysql
 import urllib.error
-import subprocess
 import requests
+import shutil
+import shlex
 from urllib.request import urlopen
 
 # Load database credentials from environment variables (Prevents hardcoding passwords)
@@ -18,8 +19,16 @@ def get_user_input():
 
 def send_email(to, subject, body):
     """ Securely send an email using subprocess instead of os.system """
+    mail_path = shutil.which("mail")  # Get the full path of the 'mail' command
+    if not mail_path:
+        print("Error: 'mail' command not found.")
+        return
+
     try:
-        subprocess.run(["mail", "-s", subject, to], input=body.encode(), check=True)
+        safe_subject = shlex.quote(subject)
+        safe_to = shlex.quote(to)
+
+        subprocess.run([mail_path, "-s", safe_subject, safe_to], input=body.encode(), check=True)
     except Exception as e:
         print(f"Error sending email: {e}")
 
