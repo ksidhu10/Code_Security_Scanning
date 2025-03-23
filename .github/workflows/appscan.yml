@@ -1,0 +1,17 @@
+name: AppScan CodeSweep
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run AppScan CodeSweep
+        uses: IBM/AppScan-CodeSweep-action@v1
+        with:
+          fail-build: false
