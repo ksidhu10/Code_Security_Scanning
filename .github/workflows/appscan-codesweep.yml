@@ -13,3 +13,5 @@ jobs:
       - uses: actions/checkout@v2
       - name: Run AppScan CodeSweep
         uses: HCL-TECH-SOFTWARE/appscan-codesweep-action@v2
+      - name: Triggering run for visibility
+        run: echo "Force GitHub to recognize renamed workflow"
