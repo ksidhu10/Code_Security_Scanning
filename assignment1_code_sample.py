@@ -1,7 +1,7 @@
 import os
-import pymysql
+import pymysql  # type: ignore
 import urllib.error
-import requests
+import requests  # type: ignore
 import shutil
 import shlex
 import subprocess  # <-- Added missing import
